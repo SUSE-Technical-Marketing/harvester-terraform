@@ -1,2 +1,4 @@
 # Ignoring the specific data to access harvester
-harvester.tfvar
+harvester.tfvars
+# Do not upload the content that terraform creates
+.terraform*
