@@ -7,7 +7,7 @@
 In main.tf we will define .....
 In versions.tf we will define which providers are we using and which versions
 
-Inside haervester folder you'll find the next files:
+Inside harvester folder you'll find the next files:
 
 ![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/harv-tree.png "Harvester folder structure")
 
