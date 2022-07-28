@@ -2,5 +2,5 @@
 harvester.tfvars
 
 # Do not upload the content that terraform creates
-terraform/*
-terraform.*
+.terraform/
+.terraform.*
