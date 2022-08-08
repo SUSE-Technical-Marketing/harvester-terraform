@@ -4,4 +4,5 @@ harvester.tfvars
 # Do not upload the content that terraform creates in the folder
 .terraform/
 .terraform.*
+terraform.*
 tfplan
