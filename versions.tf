@@ -10,5 +10,6 @@ terraform {
 
 provider "harvester" {
   # Harvester access using kubeconfig
-  kubeconfig = var.harv_kube
+  kubeconfig = "/Users/avalero/harvester-nue.yaml"
+  #kubeconfig = var.harv_kube
 }
