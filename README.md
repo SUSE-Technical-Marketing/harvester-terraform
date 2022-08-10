@@ -45,7 +45,7 @@ In many Terraform repos you'll find a main.tf file but not in this one, you can 
 
 - In harvester_images.tf file we define the images we want to donwload in Harvester. 
 
-- In network.tf it is defined a vlan net without any network parameters, you can also use one of the nets present in Harvester replacing the variable in the vms.tf for "namespace/network-name" and deleting or comenting the content in this file"
+- In network.tf it is defined a vlan net without any network parameters, you can also use one of the nets present in Harvester replacing the variable in the vms.tf for "namespace/network-name" and deleting or comenting the content in this file". For this vlan definition to work configure your network parameters on it.
 
 - In vms.tf we provide the definition of a VM that we want to have present in harvester. 
 
@@ -53,7 +53,7 @@ In many Terraform repos you'll find a main.tf file but not in this one, you can 
 An ubuntu 20.04 VM deployed using the image downloaded and with the cloud init configuration defined in vms.tf. Depending on if you used and existing vlan or using the definition provided in this repo the network may not work since the network parameters are not defined in vlan created by the network.tf. Since we are using KubeVirt all need a namespace to be deployed, in this case to make it simple the dafult namespace in the K8s cluster has been used.
 
 ## Cleanup
-With this command all the resources created shoul be destroyed.
+With this comman, all the resources created will be destroyed after you confirm with yes.
 ```
 terraform destroy
 ```
