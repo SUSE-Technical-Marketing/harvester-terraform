@@ -18,6 +18,7 @@ resource "harvester_virtualmachine" "ubuntu20-dev" {
   network_interface {
     name           = "nic-1"
     network_name   = "default/vlan-65"
+    network_name   = harvester_network.vm-vlan.id
   }
 
   disk {
