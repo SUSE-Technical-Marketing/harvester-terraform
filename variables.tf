@@ -1,0 +1,1 @@
+# In this file you'll define variables you are going to use in terraform
