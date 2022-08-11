@@ -9,8 +9,11 @@ https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/
 - Terraform installed (https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - Git cli
 
+# This repo, what to expect
+This repo is meant to help people to learn the basics of the Harvester terraform module, in case you are looking for more content you can look into the examples in the terraform doc. I'm not a terraform expert and probably there are many things to improve, so feel free to send PRs to improve the repo.
+There is no standard structure when it comes to a Terraform repo, however it is good practice to have separated files for different items or vars. In this way is easier to understand what happens and which resources you need.
+
 ## How to use this repo
-Following the steps described before you'll download an Ubuntu 20.04 image to harverster, you'll create a new network, and deploy a VM with two disks using the image you just downloaded.
 
 ```
 git clone https://github.com/avaleror/harvester-terraform.git
@@ -24,16 +27,15 @@ terraform apply "tfplan"
 Just wait a couple of minutes and you'll have a VM deployed in Harvester.
 
 ## Useful links
-In these links you can find a fair amount of information about Terraform and the Harvester module.
+In these links you can find a fair amount of information about Harvester, Terraform and the Harvester module.
 
-https://www.terraform.io/
-https://github.com/hashicorp/terraform 
-https://github.com/harvester/terraform-provider-harvester
-https://registry.terraform.io/providers/harvester/harvester/latest
+- https://harvesterhci.io/
+- https://github.com/harvester/harvester 
+- https://www.terraform.io/
+- https://github.com/hashicorp/terraform 
+- https://github.com/harvester/terraform-provider-harvester
+- https://registry.terraform.io/providers/harvester/harvester/latest
 
-# This repo, what to expect
-This repo is meant to help people to learn the basics of the Harvester terraform module, in case you are looking for more content you can look into the examples in the terraform doc. I'm not a terraform expert and probably there are many things to improve, so feel free to send PRs to improve the repo.
-There is no standard structure when it comes to a Terraform repo, however it is good practice to have separated files for different items or vars. In this way is easier to understand what happens and which resources you need.
 
 ## The repo structure
 ![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/repo-tree.png "Terraform repo structure")
