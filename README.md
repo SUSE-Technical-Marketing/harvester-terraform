@@ -1,4 +1,4 @@
-# Testing terraform provider for Harvester
+# Testing Terraform provider for Harvester
 ![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/harvester_logo.png "Harvester logo")
 
 Harvester is an HCI open source project based in Linux, Kubernetes, Kubevirt and Longhorn developed by SUSE. It is a great platform for Edge, small data centers, development environments or labs. If you want to know more go and check https://harvesterhci.io/ or SUSE´s blog. In Harvester's GitHub repo you can find the code for a Terraform provider in order to manage Harvester as IaC. You can find also the module in Terraform's registry. 
@@ -10,7 +10,7 @@ https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/
 - Git cli
 
 ## This repo, what to expect
-This repo is meant to help people to learn the basics of the Harvester terraform module, in case you are looking for more content you can look into the examples in the terraform doc. I'm not a terraform expert and probably there are many things to improve, so feel free to send PRs to improve the repo.
+This repo is meant to help people to learn the basics of the Harvester Terraform module, in case you are looking for more content you can look into the examples in the Terraform doc. I'm not a Terraform expert and probably there are many things to improve, so feel free to send PRs to improve the repo.
 
 ## How to use this repo
 
@@ -43,11 +43,11 @@ There is no standard structure when it comes to a Terraform repo, however it is 
 
 In many Terraform repos you'll find a main.tf file but not in this one, you can use as many .tf files as you want to keep the repo clean and tidy. However, when Terraform executes the `terraform plan xxxx` command it will parse all the .tf files all together.
 
-- First of all is important to create and maintain a .gitignore file, in case you don't know what this is, please read this article https://git-scm.com/docs/gitignore. Basically in this file you define the files that won't be uploaded to git. Once you run terraform it creates different files used by terraform like terraform.tfstate (where it keeps track of the changes made by the modules) or the .terraform folder, where when you run `terraform init` the different modules are downloaded, also you can use a .tfvars file to assign value to different vars and where there can be present passwords, tokens, etc. As you can imagine, it is important to maintain the .gitignore file avoiding upload unncessary or sensitive content to the git repo.
+- First of all is important to create and maintain a .gitignore file, in case you don't know what this is, please read this article https://git-scm.com/docs/gitignore. Basically in this file you define the files that won't be uploaded to git. Once you run Terraform it creates different files used by Terraform like terraform.tfstate (where it keeps track of the changes made by the modules) or the .terraform folder, where when you run `terraform init` the different modules are downloaded, also you can use a .tfvars file to assign value to different vars and where there can be present passwords, tokens, etc. As you can imagine, it is important to maintain the .gitignore file avoiding upload unncessary or sensitive content to the git repo.
   
-- In versions.tf we define which terraform modules are needed to complete the tasks and the concrete versions. Also, in this file you can define extra args or info needed for the different modules. In this example, we provide as an argument the path for the Kubeconfig local file needed to access Harvester. 
+- In versions.tf we define which Terraform modules are needed to complete the tasks and the concrete versions. Also, in this file you can define extra args or info needed for the different modules. In this example, we provide as an argument the path for the Kubeconfig local file needed to access Harvester. 
 
-- In terraform repos is usual to find a file called variables.tf in this file you define the variables needed to run the terrafom jobs, in this file you can also initialize the value for those vars as a default value, this value can be override using a .tfvars file. However, in this case I did not use any extra variable definitions.
+- In Terraform repos is usual to find a file called variables.tf in this file you define the variables needed to run the terrafom jobs, in this file you can also initialize the value for those vars as a default value, this value can be override using a .tfvars file. However, in this case I did not use any extra variable definitions.
 
 - In images.tf file we define the images we want to donwload in Harvester. 
 
@@ -56,7 +56,9 @@ In many Terraform repos you'll find a main.tf file but not in this one, you can 
 - In vms.tf we provide the definition of a VM that we want to have present in harvester. 
 
 ## The output
-An ubuntu 20.04 image downloaded, a vlan created in Harvester, and a VM deployed using the image downloaded and with the cloud init configuration defined in vms.tf all in the namespace default. Depending on if you used and existing vlan or using the definition provided in this repo the network may not work since the network parameters are not defined in vlan created by the network.tf. Since we are using KubeVirt all need a namespace to be deployed, in this case to make it simple the dafult namespace in the K8s cluster has been used.
+An ubuntu 20.04 image will be downloaded, a vlan created in Harvester, and a VM deployed using the image previously downloaded and the cloud init configuration as defined in vms.tf. 
+Depending if you are using an existing vlan or the definition provided in this repo, the network may not work since the network parameters are not defined in vlan created by the network.tf.
+Since we are using KubeVirt all need a namespace to be deployed, in this case to make it simple the default namespace in the K8s cluster will used to deploy all the items defines in Terraform.
 
 ## Cleanup
 With this command, all the resources created will be destroyed after you confirm with yes.
