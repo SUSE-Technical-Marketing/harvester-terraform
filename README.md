@@ -11,7 +11,6 @@ https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/
 
 # This repo, what to expect
 This repo is meant to help people to learn the basics of the Harvester terraform module, in case you are looking for more content you can look into the examples in the terraform doc. I'm not a terraform expert and probably there are many things to improve, so feel free to send PRs to improve the repo.
-There is no standard structure when it comes to a Terraform repo, however it is good practice to have separated files for different items or vars. In this way is easier to understand what happens and which resources you need.
 
 ## How to use this repo
 
@@ -39,6 +38,8 @@ In these links you can find a fair amount of information about Harvester, Terraf
 
 ## The repo structure
 ![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/repo-tree.png "Terraform repo structure")
+
+There is no standard structure when it comes to a Terraform repo, however it is good practice to have separated files for different items or vars. In this way is easier to understand what happens and which resources you need.
 
 In many Terraform repos you'll find a main.tf file but not in this one, you can use as many .tf files as you want to keep the repo clean and tidy. However, when Terraform executes the `terraform plan xxxx` command it will parse all the .tf files all together.
 
