@@ -1,23 +1,26 @@
 # Testing terraform provider for Harvester
 ![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/harvester_logo.png "Harvester logo")
 
-Harvester is ain HCI open source project based in Linux, Kubernetes, Kubevirt and Longhorn developed by SUSE. It is a great platform for Edge, small data centers or home labs. If you want to know more go and check https://harvesterhci.io/ or the SUSE blog. In Harvester's GitHub repo you can find the code for a Terraform provider in order to manage Harvester as IaC. You can find also the module in Terraform's registry. 
-
+Harvester is an HCI open source project based in Linux, Kubernetes, Kubevirt and Longhorn developed by SUSE. It is a great platform for Edge, small data centers, development environments or labs. If you want to know more go and check https://harvesterhci.io/ or SUSE´s blog. In Harvester's GitHub repo you can find the code for a Terraform provider in order to manage Harvester as IaC. You can find also the module in Terraform's registry. 
+In case you want to have a better understanding of what it is needed to set up a Harvester lab take a look to this blog post: 
+https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/ 
 ## Pre requisites
-- Access to a Harvester cluster
-- Install terraform (https://learn.hashicorp.com/tutorials/terraform/install-cli)
+- Access to a Harvester cluster using a Kubeconfig file
+- Terraform installed (https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - Git cli
 
 ## How to use this repo
-Following the steps described before you'll download an Ubuntu 20.04 image to harverster, you'll create a new network, and deploy a VM with two disks using the image you just downloaded. 
-´´´
+Following the steps described before you'll download an Ubuntu 20.04 image to harverster, you'll create a new network, and deploy a VM with two disks using the image you just downloaded.
+
+```
 git clone https://github.com/avaleror/harvester-terraform.git
 cd /whateverpath/harvester-terraform
 vim versions.tf #update the path for your Harvester Kubeconfig
+vim networks.tf #Add the network parameters for your cluster, otherwise the network and the VM will be created, but the VM won't have an IP
 terraform init
 terraform plan -out "tfplan"
 terraform apply "tfplan"
-´´´
+```
 Just wait a couple of minutes and you'll have a VM deployed in Harvester.
 
 ## Useful links
@@ -41,19 +44,19 @@ In many Terraform repos you'll find a main.tf file but not in this one, you can 
   
 - In versions.tf we define which terraform modules are needed to complete the tasks and the concrete versions. Also, in this file you can define extra args or info needed for the different modules. In this example, we provide as an argument the path for the Kubeconfig local file needed to access Harvester. 
 
-- In terraform repos is usual to find a file calles variables.tf in this file you define the variables needed to run the terrafom job, in here you can also initialize the value for those vars. However, in this case I did not use any extra variable definitions.
+- In terraform repos is usual to find a file called variables.tf in this file you define the variables needed to run the terrafom jobs, in this file you can also initialize the value for those vars as a default value, this value can be override using a .tfvars file. However, in this case I did not use any extra variable definitions.
 
-- In harvester_images.tf file we define the images we want to donwload in Harvester. 
+- In images.tf file we define the images we want to donwload in Harvester. 
 
-- In network.tf it is defined a vlan net without any network parameters, you can also use one of the nets present in Harvester replacing the variable in the vms.tf for "namespace/network-name" and deleting or comenting the content in this file". For this vlan definition to work configure your network parameters on it.
+- In network.tf it is defined a vlan net without any network parameters here you should define all the networks you need. If you want also it is possible to use one of the nets present in Harvester replacing the variable value in the vms.tf for "namespace/network-name" and deleting or comenting the content in this file". For this vlan definition to work configure your network parameters on it.
 
 - In vms.tf we provide the definition of a VM that we want to have present in harvester. 
 
 ## The output
-An ubuntu 20.04 VM deployed using the image downloaded and with the cloud init configuration defined in vms.tf. Depending on if you used and existing vlan or using the definition provided in this repo the network may not work since the network parameters are not defined in vlan created by the network.tf. Since we are using KubeVirt all need a namespace to be deployed, in this case to make it simple the dafult namespace in the K8s cluster has been used.
+An ubuntu 20.04 image downloaded, a vlan created in Harvester, and a VM deployed using the image downloaded and with the cloud init configuration defined in vms.tf all in the namespace default. Depending on if you used and existing vlan or using the definition provided in this repo the network may not work since the network parameters are not defined in vlan created by the network.tf. Since we are using KubeVirt all need a namespace to be deployed, in this case to make it simple the dafult namespace in the K8s cluster has been used.
 
 ## Cleanup
-With this comman, all the resources created will be destroyed after you confirm with yes.
+With this command, all the resources created will be destroyed after you confirm with yes.
 ```
 terraform destroy
 ```
