@@ -9,7 +9,7 @@ https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/
 - Terraform installed (https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - Git cli
 
-# This repo, what to expect
+## This repo, what to expect
 This repo is meant to help people to learn the basics of the Harvester terraform module, in case you are looking for more content you can look into the examples in the terraform doc. I'm not a terraform expert and probably there are many things to improve, so feel free to send PRs to improve the repo.
 
 ## How to use this repo
