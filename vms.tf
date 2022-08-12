@@ -3,7 +3,7 @@
 resource "harvester_virtualmachine" "ubuntu20-dev" {
   name                 = "ubuntu-dev"
   namespace            = "default"
-  description = "test raw image"
+  description = "test ubuntu image"
   tags = {
     ssh-user = "ubuntu"
   }
@@ -13,7 +13,6 @@ resource "harvester_virtualmachine" "ubuntu20-dev" {
 
   run_strategy = "RerunOnFailure"
   hostname     = "ubuntu-dev"
-  machine_type = "q35"
 
   network_interface {
     name           = "nic-1"
