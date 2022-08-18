@@ -72,19 +72,9 @@ resource "harvester_virtualmachine" "opensuse" {
   hostname     = "opensuse-dev"
 
   network_interface {
-    name           = "nic-1"
-    network_name   = "vlan-65"
+    name           = "nic-0"
+    network_name   = "default/vlan-65"
     #network_name   = harvester_network.vm-vlan.id
-  }
-
-  disk {
-    name       = "cdrom-disk"
-    type       = "cd-rom"
-    size       = "10Gi"
-    bus        = "sata"
-    boot_order = 1
-    image       = harvester_image.opensuse.id
-    auto_delete = true
   }
 
   disk {
@@ -92,38 +82,19 @@ resource "harvester_virtualmachine" "opensuse" {
     type       = "disk"
     size       = "40Gi"
     bus        = "virtio"
-    boot_order = 2
-    #image       = harvester_image.opensuse.id
+    boot_order = 1
+    image       = harvester_image.opensuse.id
     auto_delete = true
   }
 
-#  disk {
-#    name        = "emptydisk"
-#    type        = "disk"
-#    size        = "10Gi"
-#    bus         = "virtio"
-#    auto_delete = true
-#  }
+  disk {
+    name        = "emptydisk"
+    type        = "disk"
+    size        = "10Gi"
+    bus         = "virtio"
+    auto_delete = true
+  }
 
-#  cloudinit {
-#    user_data    = <<-EOF
-#      #cloud-config
-#      user: opensuse
-#      password: myP4$$w0rd
-#      chpasswd:
-#        expire: false
-#      ssh_pwauth: true
-#      package_update: true
-#      packages:
-#        - qemu-guest-agent
-#      runcmd:
-#        - - systemctl
-#          - enable
-#          - '--now'
-#          - qemu-guest-agent
-#      EOF
-#    network_data = ""
-#  }
   cloudinit {
     user_data    = <<-EOF
       #cloud-config
@@ -144,5 +115,4 @@ resource "harvester_virtualmachine" "opensuse" {
       EOF
     network_data = ""
   }
-
 }
