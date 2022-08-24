@@ -2,8 +2,10 @@
 ![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/harvester_logo.png "Harvester logo")
 
 Harvester is an HCI open source project based in Linux, Kubernetes, Kubevirt, and Longhorn developed by SUSE. It is an excelent platform for Edge, Cloud Native Data Centers, development environments, or labs. If you want to know more, go and check https://harvesterhci.io/ , [SUSE´s blog](https://www.suse.com/c/?s=harvester) or [SUSE's Harvester Product Page](https://www.suse.com/es-es/products/harvester/). 
+
 On Harvester's GitHub repo, you can find the code for a Terraform provider that can be used to manage Harvester as Infrastructure-as-Code (IaC). You can also find the module on [Terraform's registry](https://registry.terraform.io/providers/harvester/harvester/). 
-In case you want to have a better understanding of what it is needed to set up a Harvester lab take a look to this blog post: [Getting Hands on with Harvester HCI]https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/ 
+
+In case you want to have a better understanding of what it is needed to set up a Harvester lab take a look to this blog post: [Getting Hands on with Harvester HCI](https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/)
 
 ## Prerequisites
 - Access to a Harvester cluster using a Kubeconfig file
@@ -11,7 +13,7 @@ In case you want to have a better understanding of what it is needed to set up a
 - Git cli
 
 ## This repo, what to expect
-This repo is meant to help people to learn the basics of the Harvester Terraform module, in case you are looking for more content you can look into the examples in the Terraform doc. I'm not a Terraform expert and probably there are many things to improve, so feel free to send PRs to improve the repo.
+This repo is meant to help people to learn the basics of the Harvester Terraform module. You can review the Terraform provider documentation if you are looking for more examples. I'm not a Terraform expert, and there are probably many things to improve, so feel free to send PRs to improve the repo.
 
 ## How to use this repo
 
@@ -24,7 +26,7 @@ terraform init
 terraform plan -out "tfplan"
 terraform apply "tfplan"
 ```
-Just wait a couple of minutes and you'll have a VM deployed in Harvester.
+Just wait a few minutes, and you'll have a VM deployed in Harvester.
 
 ## Useful links
 In these links you can find a fair amount of information about Harvester, Terraform and the Harvester module.
@@ -57,7 +59,7 @@ In many Terraform repos you'll find a main.tf file but not in this one, you can 
 - In vms.tf we provide the definition of a VM that we want to have present in harvester. 
 
 ## The output
-An ubuntu 20.04 image will be downloaded, a vlan created in Harvester, and a VM deployed using the image previously downloaded and the cloud init configuration as defined in vms.tf. 
+An Ubuntu 20.04 image will be downloaded, a vlan created in Harvester, and a VM deployed using the image previously downloaded and the cloud init configuration as defined in vms.tf. 
 Depending if you are using an existing vlan or the definition provided in this repo, the network may not work since the network parameters are not defined in vlan created by the network.tf.
 Since we are using KubeVirt all need a namespace to be deployed, in this case to make it simple the default namespace in the K8s cluster will used to deploy all the items defines in Terraform.
 
