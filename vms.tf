@@ -13,10 +13,10 @@ resource "harvester_virtualmachine" "opensuse" {
 
   hostname    = var.vm_data.hostname
 
-  tags = var.vm_data.tags
+  tags        = var.vm_data.tags
 
-  cpu    = var.vm_data.cpus
-  memory = var.vm_data.memory
+  cpu         = var.vm_data.cpus
+  memory      = var.vm_data.memory
 
   run_strategy = "RerunOnFailure"
   
@@ -27,11 +27,11 @@ resource "harvester_virtualmachine" "opensuse" {
   }
 
   disk {
-    name       = var.vm_data.disks[0].name
-    type       = "disk"
-    size       = var.vm_data.disks[0].size
-    bus        = "virtio"
-    boot_order = var.vm_data.disks[0].boot_order
+    name        = var.vm_data.disks[0].name
+    type        = "disk"
+    size        = var.vm_data.disks[0].size
+    bus         = "virtio"
+    boot_order  = var.vm_data.disks[0].boot_order
     image       = harvester_image.os_image.id
     auto_delete = true
   }
@@ -41,7 +41,7 @@ resource "harvester_virtualmachine" "opensuse" {
     type        = "disk"
     size        = var.vm_data.disks[1].size
     bus         = "virtio"
-    boot_order = var.vm_data.disks[1].boot_order
+    boot_order  = var.vm_data.disks[1].boot_order
     auto_delete = true
   }
 

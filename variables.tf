@@ -30,12 +30,12 @@ variable "vm_data" {
 
   default = {
     name        = "opensuse-dev"
-    hostname        = "opensuse-dev"
+    hostname    = "opensuse-dev"
     namespace   = "default"
     description = "openSUSE test virtual machine"
     tags        = {"ssh-user"="opensuse"}
-    cpus = 2
-    memory = "2Gi"
+    cpus        = 2
+    memory      = "2Gi"
     disks = [
         {
             name = "rootdisk"
