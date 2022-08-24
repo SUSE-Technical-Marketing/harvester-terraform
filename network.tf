@@ -1,6 +1,7 @@
-resource "harvester_network" "vm-vlan" {
-  name      = "vm-vlan"
-  namespace = "default"
-  vlan_id = 33 # Check the ids on Harvester and change it accordingly
-  route_dhcp_server_ip = ""
+#We use an exiting network. 
+#Use a resource block if you need to create a custom one
+data "harvester_network" "vm_network" {
+  name      = var.vm_network.vlanid
+  namespace = var.vm_network.namespace
 }
+

@@ -1,10 +1,11 @@
 # Testing Terraform provider for Harvester
 ![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/harvester_logo.png "Harvester logo")
 
-Harvester is an HCI open source project based in Linux, Kubernetes, Kubevirt and Longhorn developed by SUSE. It is a great platform for Edge, small data centers, development environments or labs. If you want to know more go and check https://harvesterhci.io/ or SUSE´s blog. In Harvester's GitHub repo you can find the code for a Terraform provider in order to manage Harvester as IaC. You can find also the module in Terraform's registry. 
-In case you want to have a better understanding of what it is needed to set up a Harvester lab take a look to this blog post: 
-https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/ 
-## Pre requisites
+Harvester is an HCI open source project based in Linux, Kubernetes, Kubevirt, and Longhorn developed by SUSE. It is an excelent platform for Edge, Cloud Native Data Centers, development environments, or labs. If you want to know more, go and check https://harvesterhci.io/ , [SUSE´s blog](https://www.suse.com/c/?s=harvester) or [SUSE's Harvester Product Page](https://www.suse.com/es-es/products/harvester/). 
+On Harvester's GitHub repo, you can find the code for a Terraform provider that can be used to manage Harvester as Infrastructure-as-Code (IaC). You can also find the module on [Terraform's registry](https://registry.terraform.io/providers/harvester/harvester/). 
+In case you want to have a better understanding of what it is needed to set up a Harvester lab take a look to this blog post: [Getting Hands on with Harvester HCI]https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/ 
+
+## Prerequisites
 - Access to a Harvester cluster using a Kubeconfig file
 - Terraform installed (https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - Git cli
