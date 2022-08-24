@@ -48,23 +48,29 @@ In many Terraform repos, you'll find a "main.tf" file but not in this one; you c
 
 - First of all, it is important to create and maintain a .gitignore file; in case you don't know what this is, please read this article https://git-scm.com/docs/gitignore. There is where you define the files that won't be uploaded to git. Once you run Terraform, it creates several files (like "terraform.tfstate" where it keeps track of the changes made by the modules) and a folder called ".terraform" (where downloaded modules are stored after running "terraform init"). You can also use a ".tfvars" file to assign values to different vars, and may you may need to store sensitive information like passwords, tokens, etc. As you can imagine, keeping all those files and folders listed in the .gitignore file is crucial to avoid uploading unnecessary or sensitive content to the git repo.
   
-- In versions.tf we define which Terraform modules are needed to complete the tasks and the concrete versions. Also, in this file you can define extra args or info needed for the different modules. In this example, we provide as an argument the path for the Kubeconfig local file needed to access Harvester. 
+- In "providers.tf" we define which Terraform modules are needed to complete the tasks and the concrete versions. Also, in this file, you can define extra args or information required by the different modules. In this example, we provide as an argument the path for the Kubeconfig local file needed to access Harvester.
 
-- In Terraform repos is usual to find a file called variables.tf in this file you define the variables needed to run the terrafom jobs, in this file you can also initialize the value for those vars as a default value, this value can be override using a .tfvars file. However, in this case I did not use any extra variable definitions.
+- In Terraform repos is usual to find a file called "variables.tf" where you define the variables needed to run the Terraform jobs; there, you can also initialize the value for those vars with a default value. The default values can be overridden using a .tfvars file with your configuration values. Check file "terraform.tfvars_example" for some example values.
 
-- In images.tf file we define the images we want to donwload in Harvester. 
+- In "images.tf" file, we define the OS image we want to create in Harvester. 
 
-- In network.tf it is defined a vlan net without any network parameters here you should define all the networks you need. If you want also it is possible to use one of the nets present in Harvester replacing the variable value in the vms.tf for "namespace/network-name" and deleting or comenting the content in this file". For this vlan definition to work configure your network parameters on it.
+- In "network.tf" we define which of the existing networks will be used for our virtual machine. If you want to create a custom network, just replace the "data" block with a "resource" block with your new network definition.
 
-- In vms.tf we provide the definition of a VM that we want to have present in harvester. 
+- Finally, "vms.tf" contains the definition of the VM that is going to be created in Harvester. There is where we control VM-specific parameters (CPU, disks, etc.) and link to the OS image and network definitions described above.
+
+## Creation process
+Perform plan and apply on the folder where your ".tf" files are located.
+```
+terraform plan
+terraform apply
+```
 
 ## The output
-An Ubuntu 20.04 image will be downloaded, a vlan created in Harvester, and a VM deployed using the image previously downloaded and the cloud init configuration as defined in vms.tf. 
-Depending if you are using an existing vlan or the definition provided in this repo, the network may not work since the network parameters are not defined in vlan created by the network.tf.
-Since we are using KubeVirt all need a namespace to be deployed, in this case to make it simple the default namespace in the K8s cluster will used to deploy all the items defines in Terraform.
+An openSUSE 15 SP4 image will be downloaded, a VM will be deployed using that image for the OS disk, and the network interface will be connected to the defined VLAN. Deployment time OS configuration relies on the well-known cloud-init model, and you can see an example within the "vms.tf" file.
+Since we are using KubeVirt on top of Kubernetes, all created objects need a namespace to be deployed. We used the "default" namespace to keep things simple, but you can just play with the Terraform variables and select your own namespace definition.
 
 ## Cleanup
-With this command, all the resources created will be destroyed after you confirm with yes.
+This command will destroy all the resources created after you confirm with "yes".
 ```
 terraform destroy
 ```
