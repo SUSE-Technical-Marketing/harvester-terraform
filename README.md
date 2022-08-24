@@ -40,7 +40,21 @@ You can find a fair amount of information about Harvester, Terraform, and the Ha
 
 
 ## The repo structure
-![Alt text](https://github.com/avaleror/harvester-terraform/blob/master/pictures/repo-tree.png "Terraform repo structure")
+```
+$ tree
+.
+├── LICENSE
+├── README.md
+├── images.tf
+├── network.tf
+├── pictures
+│   ├── harvester_logo.png
+├── providers.tf
+├── terraform.tfstate
+├── terraform.tfvars_example
+├── variables.tf
+└── vms.tf
+```
 
 There is no standard structure when it comes to a Terraform repo; however, it is good practice to have separated files for different items or vars. This way, it is easier to understand what happens and which resources you need.
 
@@ -50,20 +64,13 @@ In many Terraform repos, you'll find a "main.tf" file but not in this one; you c
   
 - In "providers.tf" we define which Terraform modules are needed to complete the tasks and the concrete versions. Also, in this file, you can define extra args or information required by the different modules. In this example, we provide as an argument the path for the Kubeconfig local file needed to access Harvester.
 
-- In Terraform repos is usual to find a file called "variables.tf" where you define the variables needed to run the Terraform jobs; there, you can also initialize the value for those vars with a default value. The default values can be overridden using a .tfvars file with your configuration values. Check file "terraform.tfvars_example" for some example values.
+- In Terraform repos is usual to find a file called "variables.tf" where you define the variables needed to run the Terraform jobs; there, you can also initialize the value for those vars with a default value. The default values can be overridden using a ".tfvars" file with your configuration values. Check file "terraform.tfvars_example" for some example values.
 
 - In "images.tf" file, we define the OS image we want to create in Harvester. 
 
 - In "network.tf" we define which of the existing networks will be used for our virtual machine. If you want to create a custom network, just replace the "data" block with a "resource" block with your new network definition.
 
 - Finally, "vms.tf" contains the definition of the VM that is going to be created in Harvester. There is where we control VM-specific parameters (CPU, disks, etc.) and link to the OS image and network definitions described above.
-
-## Creation process
-Perform plan and apply on the folder where your ".tf" files are located.
-```
-terraform plan
-terraform apply
-```
 
 ## The output
 An openSUSE 15 SP4 image will be downloaded, a VM will be deployed using that image for the OS disk, and the network interface will be connected to the defined VLAN. Deployment time OS configuration relies on the well-known cloud-init model, and you can see an example within the "vms.tf" file.
