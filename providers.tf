@@ -3,12 +3,12 @@ terraform {
   required_providers {
     harvester = {
       source = "harvester/harvester"
-      version = "0.4.0"
+      version = "0.5.1"
     }
   }
 }
 
 provider "harvester" {
-  # Harvester access using kubeconfig
-  kubeconfig = "/yourpath/harvester_kubeconfig.yaml"
+  # Needs full path to kubeconfig file provided by Harvester
+  kubeconfig = var.harvester_kubeconfig_path
 }

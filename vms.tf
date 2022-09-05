@@ -1,118 +1,67 @@
-### VMs to provision in Harvester
-#
-#resource "harvester_virtualmachine" "ubuntu20-dev" {
-#  name                 = "ubuntu-dev"
-#  namespace            = "default"
-#  description = "test ubuntu image"
-#  tags = {
-#    ssh-user = "ubuntu"
-#  }
-#
-#  cpu    = 2
-#  memory = "2Gi"
-#
-#  run_strategy = "RerunOnFailure"
-#  hostname     = "ubuntu-dev"
-#
-#  network_interface {
-#    name           = "nic-1"
-#    network_name   = harvester_network.vm-vlan.id
-#  }
-#
-#  disk {
-#    name       = "rootdisk"
-#    type       = "disk"
-#    size       = "10Gi"
-#    bus        = "virtio"
-#    boot_order = 1
-#    image       = harvester_image.ubuntu20.id
-#    auto_delete = true
-#  }
-#
-#  disk {
-#    name        = "emptydisk"
-#    type        = "disk"
-#    size        = "20Gi"
-#    bus         = "virtio"
-#    auto_delete = true
-#  }
-#
-#  cloudinit {
-#    user_data    = <<-EOF
-#      #cloud-config
-#      user: ubuntu
-#      password: myP4$$w0rd
-#      chpasswd:
-#        expire: false
-#      ssh_pwauth: true
-#      package_update: true
-#      packages:
-#        - qemu-guest-agent
-#      runcmd:
-#        - - systemctl
-#          - enable
-#          - '--now'
-#          - qemu-guest-agent
-#      EOF
-#    network_data = ""
-#  }
-#}
-resource "harvester_virtualmachine" "opensuse" {
-  name                 = "opensuse-dev"
-  namespace            = "default"
-  description = "test opensuse image"
-  tags = {
-    ssh-user = "opensuse"
-  }
+### VM to be created on Harvester
 
-  cpu    = 2
-  memory = "2Gi"
+resource "harvester_virtualmachine" "opensuse" {
+  
+  #Wait until the chosen image is imported and ready for consumption
+  depends_on = [
+    harvester_image.os_image
+  ]
+
+  name        = var.vm_data.name
+  namespace   = var.vm_data.namespace
+  description = var.vm_data.description
+
+  hostname    = var.vm_data.hostname
+
+  tags        = var.vm_data.tags
+
+  cpu         = var.vm_data.cpus
+  memory      = var.vm_data.memory
 
   run_strategy = "RerunOnFailure"
-  hostname     = "opensuse-dev"
-
+  
   network_interface {
     name           = "nic-0"
-    network_name   = "default/vlan-65"
-    #network_name   = harvester_network.vm-vlan.id
+    #network_name   = "default/vlan-65"
+    network_name   = data.harvester_network.vm_network.name
   }
 
   disk {
-    name       = "rootdisk"
-    type       = "disk"
-    size       = "40Gi"
-    bus        = "virtio"
-    boot_order = 1
-    image       = harvester_image.opensuse.id
+    name        = var.vm_data.disks[0].name
+    type        = "disk"
+    size        = var.vm_data.disks[0].size
+    bus         = "virtio"
+    boot_order  = var.vm_data.disks[0].boot_order
+    image       = harvester_image.os_image.id
     auto_delete = true
   }
 
   disk {
-    name        = "emptydisk"
+    name        = var.vm_data.disks[1].name
     type        = "disk"
-    size        = "10Gi"
+    size        = var.vm_data.disks[1].size
     bus         = "virtio"
+    boot_order  = var.vm_data.disks[1].boot_order
     auto_delete = true
   }
 
   cloudinit {
     user_data    = <<-EOF
-      #cloud-config
-      package_update: false
-      packages:
-        - qemu-guest-agent
-      runcmd:
-        - systemctl enable qemu-guest-agent.service
-        - systemctl start --no-block qemu-guest-agent.service
-      users:
-        - default
-        - name: opensuse
-          shell: /bin/bash
-          groups: users
-          lock_passwd: false
-          passwd: myP4$$w0rd
-          sudo: ALL=(ALL) ALL:ALL
-      EOF
+    #cloud-config
+    #Used password for quick testing purposes. Should add ssh key instead
+    password: $Changeme1st
+    chpasswd:
+      expire: false
+    ssh_pwauth: true
+    package_update: true
+    packages:
+      - qemu-guest-agent
+    runcmd:
+      - systemctl enable qemu-guest-agent.service
+      - systemctl start --no-block qemu-guest-agent.service
+
+    EOF
     network_data = ""
   }
+
 }
