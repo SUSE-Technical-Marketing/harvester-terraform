@@ -22,7 +22,6 @@ resource "harvester_virtualmachine" "opensuse" {
   
   network_interface {
     name           = "nic-0"
-    #network_name   = "default/vlan-65"
     network_name   = data.harvester_network.vm_network.name
   }
 
