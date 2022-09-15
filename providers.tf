@@ -9,6 +9,6 @@ terraform {
 }
 
 provider "harvester" {
-  # Needs full path to kubeconfig file provided by Harvester
+  # Needs full path (local) to kubeconfig file provided by Harvester
   kubeconfig = var.harvester_kubeconfig_path
 }

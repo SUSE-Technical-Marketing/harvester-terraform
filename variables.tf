@@ -58,6 +58,7 @@ variable "vm_network" {
     namespace = string
   })
   default = {
+    #Remember, I'm using a value here because we already had a vlan I wanted to use. If not you'd have to create one
     vlanid = "vlan-65"
     namespace = "default"
   }
