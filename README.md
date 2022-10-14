@@ -7,6 +7,8 @@ On Harvester's GitHub repo, you can find the code for a Terraform provider that 
 
 In case you want to have a better understanding of what it is needed to set up a Harvester lab take a look to this blog post: [Getting Hands on with Harvester HCI](https://www.suse.com/c/rancher_blog/getting-hands-on-with-harvester-hci/)
 
+The code in this repo has been created as part of a blog post that fully describes the process of using Terraform and Harvester and can be reviewed here: [Managing Harvester with Terraform ](https://www.suse.com/c/rancher_blog/managing-harvester-with-terraform/)
+
 ## Prerequisites
 - Access to a Harvester cluster using a Kubeconfig file
 - Terraform installed (https://learn.hashicorp.com/tutorials/terraform/install-cli)
