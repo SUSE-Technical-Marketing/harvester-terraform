@@ -22,7 +22,7 @@ This repo is meant to help people to learn the basics of the Harvester Terraform
 ```
 git clone https://github.com/avaleror/harvester-terraform.git
 cd /whateverpath/harvester-terraform
-vim versions.tf #update the path for your Harvester Kubeconfig
+vim providers.tf #update the path for your Harvester Kubeconfig
 vim networks.tf #Add the network parameters for your cluster, otherwise the network and the VM will be created, but the VM won't have an IP
 terraform init
 terraform plan -out "tfplan"
